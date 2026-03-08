@@ -71,7 +71,7 @@ export default async function HomePage() {
             fontSize: "10px",
             letterSpacing: "0.5em",
             textTransform: "uppercase",
-            color: "rgba(212,168,67,0.6)",
+            color: "rgba(255,255,255,0.6)",
             marginBottom: "24px",
           }}
         >
@@ -83,7 +83,7 @@ export default async function HomePage() {
             fontFamily: "Cormorant Garamond, serif",
             fontSize: "clamp(3rem,10vw,8rem)",
             fontWeight: 300,
-            color: "#e0e0e0",
+            color: "#ffffff",
             lineHeight: 1,
             marginBottom: "8px",
           }}
@@ -97,7 +97,7 @@ export default async function HomePage() {
             fontSize: "clamp(3rem,10vw,8rem)",
             fontWeight: 300,
             fontStyle: "italic",
-            color: "#d4a843",
+            color: "#ffffff",
             lineHeight: 1,
             marginBottom: "32px",
           }}
@@ -118,15 +118,15 @@ export default async function HomePage() {
             style={{
               width: "40px",
               height: "1px",
-              backgroundColor: "rgba(212,168,67,0.4)",
+              backgroundColor: "rgba(255,255,255,0.4)",
             }}
           />
-          <span style={{ color: "#d4a843", fontSize: "8px" }}>◆</span>
+          <span style={{ color: "#ffffff", fontSize: "8px" }}>◆</span>
           <div
             style={{
               width: "40px",
               height: "1px",
-              backgroundColor: "rgba(212,168,67,0.4)",
+              backgroundColor: "rgba(255,255,255,0.4)",
             }}
           />
         </div>
@@ -136,7 +136,7 @@ export default async function HomePage() {
             fontFamily: "Montserrat, sans-serif",
             fontSize: "clamp(13px,2vw,16px)",
             fontWeight: 300,
-            color: "rgba(200,200,200,0.6)",
+            color: "rgba(255,255,255,0.6)",
             maxWidth: "500px",
             lineHeight: 1.8,
             marginBottom: "48px",
@@ -158,7 +158,7 @@ export default async function HomePage() {
             href="/kontakt"
             style={{
               padding: "16px 32px",
-              backgroundColor: "#d4a843",
+              backgroundColor: "#ffffff",
               color: "#050505",
               fontFamily: "Montserrat, sans-serif",
               fontSize: "11px",
@@ -174,13 +174,13 @@ export default async function HomePage() {
             style={{
               padding: "16px 32px",
               backgroundColor: "transparent",
-              color: "#c8c8c8",
+              color: "#ffffff",
               fontFamily: "Montserrat, sans-serif",
               fontSize: "11px",
               letterSpacing: "0.3em",
               textTransform: "uppercase",
               textDecoration: "none",
-              border: "1px solid rgba(200,200,200,0.2)",
+              border: "1px solid rgba(255,255,255,0.4)",
             }}
           >
             Se galleri
@@ -216,7 +216,7 @@ export default async function HomePage() {
               style={{
                 fontFamily: "Cormorant Garamond, serif",
                 fontSize: "clamp(1.5rem,4vw,2.5rem)",
-                color: "#e0e0e0",
+                color: "#ffffff",
                 fontWeight: 300,
               }}
             >
@@ -226,7 +226,7 @@ export default async function HomePage() {
               style={{
                 fontFamily: "Space Mono, monospace",
                 fontSize: "9px",
-                color: "rgba(200,200,200,0.4)",
+                color: "rgba(255,255,255,0.4)",
                 textTransform: "uppercase",
                 letterSpacing: "0.3em",
                 marginTop: "4px",
@@ -237,6 +237,7 @@ export default async function HomePage() {
           </div>
         ))}
       </div>
+
       {/* Featured seksjon */}
       {featured && (
         <div
@@ -250,7 +251,6 @@ export default async function HomePage() {
             backgroundColor: "#0a0a0a",
           }}
         >
-          {/* Bilde */}
           {featured.image?.url && (
             <div
               style={{
@@ -265,8 +265,6 @@ export default async function HomePage() {
               }}
             />
           )}
-
-          {/* Tekst */}
           <div style={{ padding: "clamp(40px, 6vw, 80px)" }}>
             <p
               style={{
@@ -274,7 +272,7 @@ export default async function HomePage() {
                 fontSize: "10px",
                 letterSpacing: "0.5em",
                 textTransform: "uppercase",
-                color: "rgba(212,168,67,0.6)",
+                color: "rgba(255,255,255,0.5)",
                 marginBottom: "16px",
               }}
             >
@@ -285,7 +283,7 @@ export default async function HomePage() {
                 fontFamily: "Cormorant Garamond, serif",
                 fontSize: "clamp(2rem,5vw,4rem)",
                 fontWeight: 300,
-                color: "#e0e0e0",
+                color: "#ffffff",
                 marginBottom: "24px",
                 lineHeight: 1.2,
               }}
@@ -296,7 +294,7 @@ export default async function HomePage() {
               style={{
                 height: "1px",
                 width: "60px",
-                backgroundColor: "rgba(212,168,67,0.4)",
+                backgroundColor: "rgba(255,255,255,0.3)",
                 marginBottom: "24px",
               }}
             />
@@ -305,7 +303,7 @@ export default async function HomePage() {
                 fontFamily: "Montserrat, sans-serif",
                 fontSize: "14px",
                 fontWeight: 300,
-                color: "rgba(200,200,200,0.6)",
+                color: "rgba(255,255,255,0.6)",
                 lineHeight: 1.9,
               }}
             >

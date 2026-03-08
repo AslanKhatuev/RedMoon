@@ -33,7 +33,7 @@ export default function Navbar() {
           transition: "all 0.7s",
           padding: scrolled ? "12px 0" : "24px 0",
           backgroundColor: scrolled ? "rgba(5,5,5,0.95)" : "transparent",
-          borderBottom: scrolled ? "1px solid rgba(212,168,67,0.1)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.1)" : "none",
           backdropFilter: scrolled ? "blur(12px)" : "none",
         }}
       >
@@ -48,38 +48,17 @@ export default function Navbar() {
           }}
         >
           {/* Logo */}
-          <Link
-            href="/"
-            style={{
-              textDecoration: "none",
-              display: "flex",
-              flexDirection: "column",
-              lineHeight: 1,
-            }}
-          >
-            <span
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <img
+              src="/redmoon_logo3.png"
+              alt="RedMoon Studio"
               style={{
-                fontFamily: "Cormorant Garamond, serif",
-                fontSize: "24px",
-                fontWeight: 300,
-                color: "#e8c46a",
-                letterSpacing: "0.3em",
+                height: scrolled ? "52px" : "62px",
+                width: "auto",
+                transition: "height 0.7s",
+                objectFit: "contain",
               }}
-            >
-              REDMOON
-            </span>
-            <span
-              style={{
-                fontFamily: "Space Mono, monospace",
-                fontSize: "8px",
-                color: "rgba(200,200,200,0.4)",
-                letterSpacing: "0.5em",
-                textTransform: "uppercase",
-                marginTop: "2px",
-              }}
-            >
-              Photo · Video · Art
-            </span>
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -106,11 +85,11 @@ export default function Navbar() {
                       letterSpacing: "0.3em",
                       textTransform: "uppercase",
                       textDecoration: "none",
-                      color: isActive ? "#e8c46a" : "rgba(200,200,200,0.6)",
+                      color: isActive ? "#ffffff" : "rgba(200,200,200,0.6)",
                       transition: "color 0.3s",
                       paddingBottom: "4px",
                       borderBottom: isActive
-                        ? "1px solid #d4a843"
+                        ? "1px solid #ffffff"
                         : "1px solid transparent",
                     }}
                   >
@@ -131,8 +110,8 @@ export default function Navbar() {
               letterSpacing: "0.3em",
               textTransform: "uppercase",
               textDecoration: "none",
-              color: "#e8c46a",
-              border: "1px solid rgba(212,168,67,0.5)",
+              color: "#ffffff",
+              border: "1px solid rgba(255,255,255,0.5)",
               padding: "10px 24px",
               transition: "all 0.3s",
             }}
@@ -147,7 +126,7 @@ export default function Navbar() {
             style={{
               background: "none",
               border: "none",
-              color: "#e8c46a",
+              color: "#ffffff",
               cursor: "pointer",
               padding: "8px",
             }}
@@ -193,7 +172,7 @@ export default function Navbar() {
                   fontFamily: "Cormorant Garamond, serif",
                   fontSize: "2.5rem",
                   fontWeight: 300,
-                  color: pathname === item.href ? "#e8c46a" : "#e0e0e0",
+                  color: pathname === item.href ? "#ffffff" : "#e0e0e0",
                   textDecoration: "none",
                 }}
               >
@@ -211,8 +190,8 @@ export default function Navbar() {
             letterSpacing: "0.3em",
             textTransform: "uppercase",
             textDecoration: "none",
-            color: "#e8c46a",
-            border: "1px solid #d4a843",
+            color: "#ffffff",
+            border: "1px solid rgba(255,255,255,0.5)",
             padding: "12px 32px",
           }}
         >
