@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getHeroContent, getFeaturedSection } from "@/lib/strapi";
 
 const STRAPI_URL =
