@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { TESTIMONIALS } from "@/lib/data";
 import { getTestimonials, getAboutPage } from "@/lib/strapi";
 
