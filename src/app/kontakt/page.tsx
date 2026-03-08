@@ -16,6 +16,32 @@ const SERVICES_LIST = [
   "Annet",
 ];
 
+function SubmitButton({ sent }: { sent: boolean }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <button
+      type="submit"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        padding: "16px",
+        backgroundColor: hovered ? "rgba(255,255,255,0.9)" : "#ffffff",
+        color: "#050505",
+        fontFamily: "Montserrat, sans-serif",
+        fontSize: "11px",
+        letterSpacing: "0.3em",
+        textTransform: "uppercase",
+        border: "none",
+        cursor: "pointer",
+        opacity: hovered ? 0.85 : 1,
+        transition: "opacity 0.3s",
+      }}
+    >
+      {sent ? "Sendt! Vi kontakter deg snart ✓" : "Send forespørsel"}
+    </button>
+  );
+}
+
 export default function KontaktPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -30,16 +56,11 @@ export default function KontaktPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(
-        `http://localhost:1337/api/contact-submissions`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ data: formData }),
-        }
-      );
+      const res = await fetch("http://localhost:1337/api/contact-submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data: formData }),
+      });
       if (res.ok) {
         setSent(true);
         setFormData({
@@ -63,7 +84,7 @@ export default function KontaktPage() {
     width: "100%",
     backgroundColor: "#111111",
     border: "1px solid rgba(255,255,255,0.08)",
-    color: "#c8c8c8",
+    color: "#ffffff",
     padding: "12px 16px",
     fontSize: "13px",
     fontFamily: "Montserrat, sans-serif",
@@ -89,7 +110,7 @@ export default function KontaktPage() {
               fontSize: "10px",
               letterSpacing: "0.5em",
               textTransform: "uppercase",
-              color: "rgba(212,168,67,0.6)",
+              color: "rgba(255,255,255,0.5)",
               marginBottom: "16px",
             }}
           >
@@ -100,7 +121,7 @@ export default function KontaktPage() {
               fontFamily: "Cormorant Garamond, serif",
               fontSize: "clamp(2rem,6vw,5rem)",
               fontWeight: 300,
-              color: "#e0e0e0",
+              color: "#ffffff",
               marginBottom: "24px",
             }}
           >
@@ -112,12 +133,12 @@ export default function KontaktPage() {
               maxWidth: "200px",
               margin: "0 auto",
               background:
-                "linear-gradient(90deg, transparent, #d4a843, transparent)",
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
             }}
           />
         </div>
 
-        {/* Grid – stacker på mobil */}
+        {/* Grid */}
         <div
           style={{
             display: "grid",
@@ -133,7 +154,7 @@ export default function KontaktPage() {
                 fontFamily: "Cormorant Garamond, serif",
                 fontSize: "clamp(1.4rem,3vw,2rem)",
                 fontWeight: 300,
-                color: "#e0e0e0",
+                color: "#ffffff",
                 fontStyle: "italic",
                 lineHeight: 1.4,
                 marginBottom: "36px",
@@ -162,14 +183,14 @@ export default function KontaktPage() {
                     width: "36px",
                     height: "36px",
                     flexShrink: 0,
-                    border: "1px solid rgba(212,168,67,0.2)",
+                    border: "1px solid rgba(255,255,255,0.2)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
                   <span
-                    style={{ color: "rgba(212,168,67,0.5)", fontSize: "10px" }}
+                    style={{ color: "rgba(255,255,255,0.5)", fontSize: "10px" }}
                   >
                     ◆
                   </span>
@@ -179,7 +200,7 @@ export default function KontaktPage() {
                     style={{
                       fontFamily: "Space Mono, monospace",
                       fontSize: "9px",
-                      color: "rgba(200,200,200,0.4)",
+                      color: "rgba(255,255,255,0.4)",
                       textTransform: "uppercase",
                       letterSpacing: "0.2em",
                       marginBottom: "3px",
@@ -192,7 +213,7 @@ export default function KontaktPage() {
                       fontFamily: "Montserrat, sans-serif",
                       fontSize: "14px",
                       fontWeight: 300,
-                      color: "#c8c8c8",
+                      color: "#ffffff",
                     }}
                   >
                     {value}
@@ -207,7 +228,7 @@ export default function KontaktPage() {
                 style={{
                   fontFamily: "Space Mono, monospace",
                   fontSize: "9px",
-                  color: "rgba(212,168,67,0.5)",
+                  color: "rgba(255,255,255,0.4)",
                   textTransform: "uppercase",
                   letterSpacing: "0.4em",
                   marginBottom: "20px",
@@ -233,7 +254,7 @@ export default function KontaktPage() {
                     style={{
                       fontFamily: "Space Mono, monospace",
                       fontSize: "11px",
-                      color: "rgba(212,168,67,0.4)",
+                      color: "rgba(255,255,255,0.4)",
                       flexShrink: 0,
                     }}
                   >
@@ -251,7 +272,7 @@ export default function KontaktPage() {
                       fontFamily: "Montserrat, sans-serif",
                       fontSize: "12px",
                       fontWeight: 300,
-                      color: "rgba(200,200,200,0.5)",
+                      color: "rgba(255,255,255,0.5)",
                     }}
                   >
                     {step.text}
@@ -293,7 +314,6 @@ export default function KontaktPage() {
                 style={inputStyle}
               />
             </div>
-
             <input
               type="email"
               placeholder="E-post *"
@@ -304,7 +324,6 @@ export default function KontaktPage() {
               }
               style={inputStyle}
             />
-
             <select
               value={formData.service}
               onChange={(e) =>
@@ -325,7 +344,6 @@ export default function KontaktPage() {
                 </option>
               ))}
             </select>
-
             <input
               type="date"
               value={formData.date}
@@ -334,7 +352,6 @@ export default function KontaktPage() {
               }
               style={{ ...inputStyle, colorScheme: "dark" }}
             />
-
             <textarea
               rows={5}
               placeholder="Fortell oss om arrangementet ditt..."
@@ -344,30 +361,13 @@ export default function KontaktPage() {
               }
               style={{ ...inputStyle, resize: "none" }}
             />
-
-            <button
-              type="submit"
-              style={{
-                padding: "16px",
-                backgroundColor: "#d4a843",
-                color: "#050505",
-                fontFamily: "Montserrat, sans-serif",
-                fontSize: "11px",
-                letterSpacing: "0.3em",
-                textTransform: "uppercase",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              {sent ? "Sendt! Vi kontakter deg snart ✓" : "Send forespørsel"}
-            </button>
-
+            <SubmitButton sent={sent} />
             <p
               style={{
                 textAlign: "center",
                 fontFamily: "Space Mono, monospace",
                 fontSize: "9px",
-                color: "rgba(200,200,200,0.3)",
+                color: "rgba(255,255,255,0.3)",
                 letterSpacing: "0.2em",
               }}
             >

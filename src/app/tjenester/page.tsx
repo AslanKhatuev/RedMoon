@@ -4,7 +4,6 @@ import { SERVICES } from "@/lib/data";
 export default async function TjenesterPage() {
   let services = await getServices();
 
-  // Bruk placeholder-data hvis Strapi er tom
   if (!services || services.length === 0) {
     services = SERVICES.map((s) => ({ ...s }));
   } else {
@@ -39,7 +38,7 @@ export default async function TjenesterPage() {
               fontSize: "10px",
               letterSpacing: "0.5em",
               textTransform: "uppercase",
-              color: "rgba(212,168,67,0.6)",
+              color: "rgba(255,255,255,0.5)",
               marginBottom: "16px",
             }}
           >
@@ -50,7 +49,7 @@ export default async function TjenesterPage() {
               fontFamily: "Cormorant Garamond, serif",
               fontSize: "clamp(2rem,6vw,5rem)",
               fontWeight: 300,
-              color: "#e0e0e0",
+              color: "#ffffff",
               marginBottom: "24px",
             }}
           >
@@ -62,7 +61,7 @@ export default async function TjenesterPage() {
               maxWidth: "200px",
               margin: "0 auto",
               background:
-                "linear-gradient(90deg, transparent, #d4a843, transparent)",
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
             }}
           />
         </div>
@@ -76,7 +75,7 @@ export default async function TjenesterPage() {
                 fontSize: "10px",
                 letterSpacing: "0.4em",
                 textTransform: "uppercase",
-                color: "rgba(212,168,67,0.5)",
+                color: "rgba(255,255,255,0.4)",
                 marginBottom: "24px",
               }}
             >
@@ -103,7 +102,7 @@ export default async function TjenesterPage() {
                       fontFamily: "Cormorant Garamond, serif",
                       fontSize: "clamp(18px,3vw,22px)",
                       fontWeight: 300,
-                      color: "#e0e0e0",
+                      color: "#ffffff",
                       marginBottom: "10px",
                     }}
                   >
@@ -114,7 +113,7 @@ export default async function TjenesterPage() {
                       fontFamily: "Montserrat, sans-serif",
                       fontSize: "13px",
                       fontWeight: 300,
-                      color: "rgba(200,200,200,0.5)",
+                      color: "rgba(255,255,255,0.5)",
                       lineHeight: 1.7,
                     }}
                   >
@@ -135,7 +134,7 @@ export default async function TjenesterPage() {
                 fontSize: "10px",
                 letterSpacing: "0.4em",
                 textTransform: "uppercase",
-                color: "rgba(212,168,67,0.5)",
+                color: "rgba(255,255,255,0.4)",
                 marginBottom: "24px",
               }}
             >
@@ -162,7 +161,7 @@ export default async function TjenesterPage() {
                       fontFamily: "Cormorant Garamond, serif",
                       fontSize: "clamp(18px,3vw,22px)",
                       fontWeight: 300,
-                      color: "#e0e0e0",
+                      color: "#ffffff",
                       marginBottom: "10px",
                     }}
                   >
@@ -173,7 +172,7 @@ export default async function TjenesterPage() {
                       fontFamily: "Montserrat, sans-serif",
                       fontSize: "13px",
                       fontWeight: 300,
-                      color: "rgba(200,200,200,0.5)",
+                      color: "rgba(255,255,255,0.5)",
                       lineHeight: 1.7,
                     }}
                   >

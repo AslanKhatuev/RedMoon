@@ -19,6 +19,7 @@ export default async function OmOssPage() {
       date: t.date,
     }));
   }
+
   return (
     <main
       style={{
@@ -37,7 +38,7 @@ export default async function OmOssPage() {
               fontSize: "10px",
               letterSpacing: "0.5em",
               textTransform: "uppercase",
-              color: "rgba(212,168,67,0.6)",
+              color: "rgba(255,255,255,0.5)",
               marginBottom: "16px",
             }}
           >
@@ -48,7 +49,7 @@ export default async function OmOssPage() {
               fontFamily: "Cormorant Garamond, serif",
               fontSize: "clamp(2rem,6vw,5rem)",
               fontWeight: 300,
-              color: "#e0e0e0",
+              color: "#ffffff",
               marginBottom: "24px",
             }}
           >
@@ -60,12 +61,12 @@ export default async function OmOssPage() {
               maxWidth: "200px",
               margin: "0 auto",
               background:
-                "linear-gradient(90deg, transparent, #d4a843, transparent)",
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
             }}
           />
         </div>
 
-        {/* Om tekst – stacker på mobil */}
+        {/* Om tekst */}
         <div
           style={{
             display: "grid",
@@ -82,7 +83,7 @@ export default async function OmOssPage() {
                 fontFamily: "Cormorant Garamond, serif",
                 fontSize: "clamp(1.4rem,3vw,2rem)",
                 fontWeight: 300,
-                color: "#e0e0e0",
+                color: "#ffffff",
                 fontStyle: "italic",
                 lineHeight: 1.4,
                 marginBottom: "24px",
@@ -95,7 +96,7 @@ export default async function OmOssPage() {
                 fontFamily: "Montserrat, sans-serif",
                 fontSize: "14px",
                 fontWeight: 300,
-                color: "rgba(200,200,200,0.6)",
+                color: "rgba(255,255,255,0.6)",
                 lineHeight: 1.9,
                 marginBottom: "16px",
               }}
@@ -108,7 +109,7 @@ export default async function OmOssPage() {
                 fontFamily: "Montserrat, sans-serif",
                 fontSize: "14px",
                 fontWeight: 300,
-                color: "rgba(200,200,200,0.6)",
+                color: "rgba(255,255,255,0.6)",
                 lineHeight: 1.9,
               }}
             >
@@ -146,7 +147,7 @@ export default async function OmOssPage() {
               <div
                 key={item.title}
                 style={{
-                  borderLeft: "1px solid rgba(212,168,67,0.2)",
+                  borderLeft: "1px solid rgba(255,255,255,0.15)",
                   paddingLeft: "16px",
                 }}
               >
@@ -154,7 +155,7 @@ export default async function OmOssPage() {
                   style={{
                     fontFamily: "Montserrat, sans-serif",
                     fontSize: "13px",
-                    color: "#e0e0e0",
+                    color: "#ffffff",
                     marginBottom: "6px",
                   }}
                 >
@@ -164,7 +165,7 @@ export default async function OmOssPage() {
                   style={{
                     fontFamily: "Space Mono, monospace",
                     fontSize: "10px",
-                    color: "rgba(200,200,200,0.4)",
+                    color: "rgba(255,255,255,0.4)",
                     lineHeight: 1.5,
                   }}
                 >
@@ -183,7 +184,7 @@ export default async function OmOssPage() {
               fontSize: "10px",
               letterSpacing: "0.5em",
               textTransform: "uppercase",
-              color: "rgba(212,168,67,0.6)",
+              color: "rgba(255,255,255,0.5)",
               marginBottom: "16px",
               textAlign: "center",
             }}
@@ -195,7 +196,7 @@ export default async function OmOssPage() {
               fontFamily: "Cormorant Garamond, serif",
               fontSize: "clamp(1.8rem,4vw,3.5rem)",
               fontWeight: 300,
-              color: "#e0e0e0",
+              color: "#ffffff",
               textAlign: "center",
               marginBottom: "40px",
             }}
@@ -220,7 +221,7 @@ export default async function OmOssPage() {
                   style={{
                     fontFamily: "Cormorant Garamond, serif",
                     fontSize: "64px",
-                    color: "rgba(212,168,67,0.08)",
+                    color: "rgba(255,255,255,0.05)",
                     lineHeight: 1,
                     marginBottom: "12px",
                   }}
@@ -233,7 +234,7 @@ export default async function OmOssPage() {
                   {Array.from({ length: t.rating }).map((_, i) => (
                     <span
                       key={i}
-                      style={{ color: "#e8c46a", fontSize: "12px" }}
+                      style={{ color: "#ffffff", fontSize: "12px" }}
                     >
                       ★
                     </span>
@@ -244,7 +245,7 @@ export default async function OmOssPage() {
                     fontFamily: "Cormorant Garamond, serif",
                     fontSize: "clamp(16px,2.5vw,18px)",
                     fontWeight: 300,
-                    color: "#e0e0e0",
+                    color: "#ffffff",
                     fontStyle: "italic",
                     lineHeight: 1.7,
                     marginBottom: "20px",
@@ -255,7 +256,8 @@ export default async function OmOssPage() {
                 <div
                   style={{
                     height: "1px",
-                    background: "linear-gradient(90deg, #d4a843, transparent)",
+                    background:
+                      "linear-gradient(90deg, rgba(255,255,255,0.3), transparent)",
                     marginBottom: "14px",
                   }}
                 />
@@ -263,7 +265,7 @@ export default async function OmOssPage() {
                   style={{
                     fontFamily: "Montserrat, sans-serif",
                     fontSize: "13px",
-                    color: "#c8c8c8",
+                    color: "#ffffff",
                   }}
                 >
                   {t.name}
@@ -272,7 +274,7 @@ export default async function OmOssPage() {
                   style={{
                     fontFamily: "Space Mono, monospace",
                     fontSize: "9px",
-                    color: "rgba(200,200,200,0.4)",
+                    color: "rgba(255,255,255,0.4)",
                     textTransform: "uppercase",
                     letterSpacing: "0.2em",
                     marginTop: "4px",

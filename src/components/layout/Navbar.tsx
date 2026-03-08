@@ -6,6 +6,34 @@ import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/lib/data";
 import { Menu, X } from "lucide-react";
 
+function BookButton({ mobile = false }: { mobile?: boolean }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      href="/kontakt"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={mobile ? "" : "hidden-mobile"}
+      style={{
+        fontFamily: "Montserrat, sans-serif",
+        fontSize: mobile ? "11px" : "10px",
+        letterSpacing: "0.3em",
+        textTransform: "uppercase",
+        textDecoration: "none",
+        color: hovered ? "#050505" : "#ffffff",
+        backgroundColor: hovered ? "#ffffff" : "transparent",
+        border: "1px solid rgba(255,255,255,0.5)",
+        padding: mobile ? "12px 32px" : "10px 24px",
+        transition: "all 0.3s",
+        marginTop: mobile ? "48px" : "0",
+        display: "inline-block",
+      }}
+    >
+      Book nå
+    </Link>
+  );
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -100,24 +128,8 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Book nå knapp */}
-          <Link
-            href="/kontakt"
-            className="hidden-mobile"
-            style={{
-              fontFamily: "Montserrat, sans-serif",
-              fontSize: "10px",
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              color: "#ffffff",
-              border: "1px solid rgba(255,255,255,0.5)",
-              padding: "10px 24px",
-              transition: "all 0.3s",
-            }}
-          >
-            Book nå
-          </Link>
+          {/* Book nå knapp – desktop */}
+          <BookButton />
 
           {/* Hamburger */}
           <button
@@ -181,22 +193,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <Link
-          href="/kontakt"
-          style={{
-            marginTop: "48px",
-            fontFamily: "Montserrat, sans-serif",
-            fontSize: "11px",
-            letterSpacing: "0.3em",
-            textTransform: "uppercase",
-            textDecoration: "none",
-            color: "#ffffff",
-            border: "1px solid rgba(255,255,255,0.5)",
-            padding: "12px 32px",
-          }}
-        >
-          Book nå
-        </Link>
+        <BookButton mobile />
       </div>
     </>
   );

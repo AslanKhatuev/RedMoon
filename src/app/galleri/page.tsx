@@ -23,7 +23,6 @@ const COLORS = [
   "#161616",
   "#0e0e0e",
 ];
-
 const STRAPI_URL =
   process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 
@@ -71,7 +70,7 @@ export default function GalleriPage() {
               fontSize: "10px",
               letterSpacing: "0.5em",
               textTransform: "uppercase",
-              color: "rgba(212,168,67,0.6)",
+              color: "rgba(255,255,255,0.5)",
               marginBottom: "16px",
             }}
           >
@@ -82,7 +81,7 @@ export default function GalleriPage() {
               fontFamily: "Cormorant Garamond, serif",
               fontSize: "clamp(2rem,6vw,5rem)",
               fontWeight: 300,
-              color: "#e0e0e0",
+              color: "#ffffff",
               marginBottom: "24px",
             }}
           >
@@ -94,7 +93,7 @@ export default function GalleriPage() {
               maxWidth: "200px",
               margin: "0 auto",
               background:
-                "linear-gradient(90deg, transparent, #d4a843, transparent)",
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
             }}
           />
         </div>
@@ -123,10 +122,10 @@ export default function GalleriPage() {
                 border: "none",
                 borderBottom:
                   activeCategory === cat
-                    ? "1px solid #d4a843"
+                    ? "1px solid #ffffff"
                     : "1px solid transparent",
                 color:
-                  activeCategory === cat ? "#e8c46a" : "rgba(200,200,200,0.4)",
+                  activeCategory === cat ? "#ffffff" : "rgba(255,255,255,0.4)",
                 cursor: "pointer",
               }}
             >
@@ -142,7 +141,7 @@ export default function GalleriPage() {
               textAlign: "center",
               fontFamily: "Space Mono, monospace",
               fontSize: "10px",
-              color: "rgba(200,200,200,0.3)",
+              color: "rgba(255,255,255,0.3)",
               letterSpacing: "0.3em",
             }}
           >
@@ -157,7 +156,7 @@ export default function GalleriPage() {
               textAlign: "center",
               fontFamily: "Cormorant Garamond, serif",
               fontSize: "24px",
-              color: "rgba(200,200,200,0.2)",
+              color: "rgba(255,255,255,0.2)",
               fontStyle: "italic",
             }}
           >
@@ -179,7 +178,6 @@ export default function GalleriPage() {
             {filtered.map((item, i) => {
               const mediaUrl = getMediaUrl(item);
               const isVideo = item.type === "video";
-
               return (
                 <div
                   key={item.id}
@@ -191,19 +189,18 @@ export default function GalleriPage() {
                     overflow: "hidden",
                   }}
                   onMouseEnter={(e) => {
-                    const overlay = e.currentTarget.querySelector(
+                    const o = e.currentTarget.querySelector(
                       ".overlay"
                     ) as HTMLElement;
-                    if (overlay) overlay.style.opacity = "1";
+                    if (o) o.style.opacity = "1";
                   }}
                   onMouseLeave={(e) => {
-                    const overlay = e.currentTarget.querySelector(
+                    const o = e.currentTarget.querySelector(
                       ".overlay"
                     ) as HTMLElement;
-                    if (overlay) overlay.style.opacity = "0";
+                    if (o) o.style.opacity = "0";
                   }}
                 >
-                  {/* Bilde eller video thumbnail */}
                   {mediaUrl && !isVideo && (
                     <img
                       src={mediaUrl}
@@ -230,8 +227,6 @@ export default function GalleriPage() {
                       muted
                     />
                   )}
-
-                  {/* Pattern hvis ingen media */}
                   {!mediaUrl && (
                     <div
                       style={{
@@ -239,7 +234,7 @@ export default function GalleriPage() {
                         inset: 0,
                         opacity: 0.05,
                         backgroundImage:
-                          "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212,168,67,0.3) 10px, rgba(212,168,67,0.3) 11px)",
+                          "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.3) 10px, rgba(255,255,255,0.3) 11px)",
                       }}
                     />
                   )}
@@ -254,7 +249,7 @@ export default function GalleriPage() {
                       padding: "3px 8px",
                       fontFamily: "Space Mono, monospace",
                       fontSize: "8px",
-                      color: "rgba(212,168,67,0.7)",
+                      color: "rgba(255,255,255,0.7)",
                       textTransform: "uppercase",
                       letterSpacing: "0.2em",
                       zIndex: 2,
@@ -269,7 +264,7 @@ export default function GalleriPage() {
                         position: "absolute",
                         bottom: "12px",
                         right: "12px",
-                        color: "rgba(232,196,106,0.6)",
+                        color: "rgba(255,255,255,0.6)",
                         fontSize: "16px",
                         zIndex: 2,
                       }}
@@ -295,14 +290,14 @@ export default function GalleriPage() {
                       zIndex: 3,
                     }}
                   >
-                    <span style={{ fontSize: "24px", color: "#e8c46a" }}>
+                    <span style={{ fontSize: "24px", color: "#ffffff" }}>
                       {isVideo ? "▶" : "⊕"}
                     </span>
                     <p
                       style={{
                         fontFamily: "Space Mono, monospace",
                         fontSize: "9px",
-                        color: "#e0e0e0",
+                        color: "#ffffff",
                         textTransform: "uppercase",
                         letterSpacing: "0.2em",
                       }}
@@ -340,7 +335,7 @@ export default function GalleriPage() {
               right: "24px",
               background: "none",
               border: "none",
-              color: "#c8c8c8",
+              color: "#ffffff",
               fontSize: "24px",
               cursor: "pointer",
             }}
@@ -373,7 +368,7 @@ export default function GalleriPage() {
               style={{
                 fontFamily: "Cormorant Garamond, serif",
                 fontSize: "clamp(1.2rem,4vw,2rem)",
-                color: "#e0e0e0",
+                color: "#ffffff",
                 fontStyle: "italic",
                 marginTop: "16px",
               }}
