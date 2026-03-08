@@ -39,7 +39,7 @@ export default function Navbar() {
                 letterSpacing: "0.3em",
               }}
             >
-              RedMoon
+              REDMOON
             </span>
             <span
               className="text-[9px] text-silver-400/50 uppercase"
