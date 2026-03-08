@@ -17,7 +17,7 @@ export default function TjenesterPage() {
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "80px" }}>
+        <div style={{ textAlign: "center", marginBottom: "60px" }}>
           <p
             style={{
               fontFamily: "Space Mono, monospace",
@@ -33,7 +33,7 @@ export default function TjenesterPage() {
           <h1
             style={{
               fontFamily: "Cormorant Garamond, serif",
-              fontSize: "clamp(2.5rem,6vw,5rem)",
+              fontSize: "clamp(2rem,6vw,5rem)",
               fontWeight: 300,
               color: "#e0e0e0",
               marginBottom: "24px",
@@ -52,8 +52,8 @@ export default function TjenesterPage() {
           />
         </div>
 
-        {/* Video seksjonen */}
-        <div style={{ marginBottom: "64px" }}>
+        {/* Video */}
+        <div style={{ marginBottom: "48px" }}>
           <p
             style={{
               fontFamily: "Space Mono, monospace",
@@ -61,7 +61,7 @@ export default function TjenesterPage() {
               letterSpacing: "0.4em",
               textTransform: "uppercase",
               color: "rgba(212,168,67,0.5)",
-              marginBottom: "32px",
+              marginBottom: "24px",
             }}
           >
             — Video
@@ -69,7 +69,8 @@ export default function TjenesterPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+              gridTemplateColumns:
+                "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
               gap: "2px",
             }}
           >
@@ -78,27 +79,19 @@ export default function TjenesterPage() {
                 key={service.id}
                 style={{
                   backgroundColor: "#0a0a0a",
-                  padding: "32px",
-                  borderTop: "1px solid transparent",
-                  transition: "all 0.3s",
+                  padding: "28px 24px",
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#111111")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#0a0a0a")
-                }
               >
-                <div style={{ fontSize: "28px", marginBottom: "16px" }}>
+                <div style={{ fontSize: "26px", marginBottom: "12px" }}>
                   {service.icon}
                 </div>
                 <h3
                   style={{
                     fontFamily: "Cormorant Garamond, serif",
-                    fontSize: "22px",
+                    fontSize: "clamp(18px,3vw,22px)",
                     fontWeight: 300,
                     color: "#e0e0e0",
-                    marginBottom: "12px",
+                    marginBottom: "10px",
                   }}
                 >
                   {service.title}
@@ -119,7 +112,7 @@ export default function TjenesterPage() {
           </div>
         </div>
 
-        {/* Foto seksjonen */}
+        {/* Foto */}
         <div>
           <p
             style={{
@@ -128,7 +121,7 @@ export default function TjenesterPage() {
               letterSpacing: "0.4em",
               textTransform: "uppercase",
               color: "rgba(212,168,67,0.5)",
-              marginBottom: "32px",
+              marginBottom: "24px",
             }}
           >
             — Foto
@@ -136,7 +129,8 @@ export default function TjenesterPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+              gridTemplateColumns:
+                "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
               gap: "2px",
             }}
           >
@@ -145,26 +139,19 @@ export default function TjenesterPage() {
                 key={service.id}
                 style={{
                   backgroundColor: "#0a0a0a",
-                  padding: "32px",
-                  transition: "all 0.3s",
+                  padding: "28px 24px",
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#111111")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#0a0a0a")
-                }
               >
-                <div style={{ fontSize: "28px", marginBottom: "16px" }}>
+                <div style={{ fontSize: "26px", marginBottom: "12px" }}>
                   {service.icon}
                 </div>
                 <h3
                   style={{
                     fontFamily: "Cormorant Garamond, serif",
-                    fontSize: "22px",
+                    fontSize: "clamp(18px,3vw,22px)",
                     fontWeight: 300,
                     color: "#e0e0e0",
-                    marginBottom: "12px",
+                    marginBottom: "10px",
                   }}
                 >
                   {service.title}

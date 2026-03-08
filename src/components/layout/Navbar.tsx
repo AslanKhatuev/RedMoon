@@ -24,97 +24,178 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-          scrolled
-            ? "bg-obsidian-950/95 backdrop-blur-md border-b border-gold-500/10 py-3"
-            : "bg-transparent py-6"
-        }`}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          transition: "all 0.7s",
+          padding: scrolled ? "12px 0" : "24px 0",
+          backgroundColor: scrolled ? "rgba(5,5,5,0.95)" : "transparent",
+          borderBottom: scrolled ? "1px solid rgba(212,168,67,0.1)" : "none",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+        }}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link href="/" className="flex flex-col leading-none group">
+        <div
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          {/* Logo */}
+          <Link
+            href="/"
+            style={{
+              textDecoration: "none",
+              display: "flex",
+              flexDirection: "column",
+              lineHeight: 1,
+            }}
+          >
             <span
-              className="text-2xl text-gold-400 group-hover:text-gold-300 transition-colors duration-300"
               style={{
                 fontFamily: "Cormorant Garamond, serif",
+                fontSize: "24px",
+                fontWeight: 300,
+                color: "#e8c46a",
                 letterSpacing: "0.3em",
               }}
             >
               REDMOON
             </span>
             <span
-              className="text-[9px] text-silver-400/50 uppercase"
               style={{
                 fontFamily: "Space Mono, monospace",
+                fontSize: "8px",
+                color: "rgba(200,200,200,0.4)",
                 letterSpacing: "0.5em",
+                textTransform: "uppercase",
+                marginTop: "2px",
               }}
             >
               Photo · Video · Art
             </span>
           </Link>
 
-          <ul className="hidden md:flex items-center gap-8">
+          {/* Desktop nav */}
+          <ul
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "32px",
+              listStyle: "none",
+              margin: 0,
+              padding: 0,
+            }}
+            className="hidden-mobile"
+          >
             {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`text-[11px] uppercase transition-colors duration-300 relative group ${
-                      isActive
-                        ? "text-gold-400"
-                        : "text-silver-400/60 hover:text-gold-400"
-                    }`}
                     style={{
                       fontFamily: "Montserrat, sans-serif",
+                      fontSize: "11px",
                       letterSpacing: "0.3em",
+                      textTransform: "uppercase",
+                      textDecoration: "none",
+                      color: isActive ? "#e8c46a" : "rgba(200,200,200,0.6)",
+                      transition: "color 0.3s",
+                      paddingBottom: "4px",
+                      borderBottom: isActive
+                        ? "1px solid #d4a843"
+                        : "1px solid transparent",
                     }}
                   >
                     {item.label}
-                    <span
-                      className={`absolute -bottom-1 left-0 h-px bg-gold-500 transition-all duration-300 ${
-                        isActive ? "w-full" : "w-0 group-hover:w-full"
-                      }`}
-                    />
                   </Link>
                 </li>
               );
             })}
           </ul>
 
+          {/* Book nå knapp */}
           <Link
             href="/kontakt"
-            className="hidden md:block text-[10px] uppercase px-6 py-2.5 border border-gold-500/50 text-gold-400 hover:bg-gold-500/10 transition-all duration-300"
+            className="hidden-mobile"
             style={{
               fontFamily: "Montserrat, sans-serif",
+              fontSize: "10px",
               letterSpacing: "0.3em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              color: "#e8c46a",
+              border: "1px solid rgba(212,168,67,0.5)",
+              padding: "10px 24px",
+              transition: "all 0.3s",
             }}
           >
             Book nå
           </Link>
 
+          {/* Hamburger */}
           <button
-            className="md:hidden text-gold-400 p-2"
+            className="show-mobile"
             onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              background: "none",
+              border: "none",
+              color: "#e8c46a",
+              cursor: "pointer",
+              padding: "8px",
+            }}
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </nav>
 
+      {/* Mobilmeny */}
       <div
-        className={`fixed inset-0 z-40 bg-obsidian-950/98 backdrop-blur-lg flex flex-col items-center justify-center transition-all duration-500 ${
-          menuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 40,
+          backgroundColor: "rgba(5,5,5,0.98)",
+          backdropFilter: "blur(12px)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? "auto" : "none",
+          transition: "opacity 0.5s",
+        }}
       >
-        <ul className="flex flex-col items-center gap-8">
+        <ul
+          style={{
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "32px",
+          }}
+        >
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="text-3xl text-silver-200 hover:text-gold-400 transition-colors duration-300"
-                style={{ fontFamily: "Cormorant Garamond, serif" }}
+                style={{
+                  fontFamily: "Cormorant Garamond, serif",
+                  fontSize: "2.5rem",
+                  fontWeight: 300,
+                  color: pathname === item.href ? "#e8c46a" : "#e0e0e0",
+                  textDecoration: "none",
+                }}
               >
                 {item.label}
               </Link>
@@ -123,7 +204,17 @@ export default function Navbar() {
         </ul>
         <Link
           href="/kontakt"
-          className="mt-12 text-[11px] uppercase px-8 py-3 border border-gold-500 text-gold-400 hover:bg-gold-500/10 transition-all duration-300"
+          style={{
+            marginTop: "48px",
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "11px",
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            color: "#e8c46a",
+            border: "1px solid #d4a843",
+            padding: "12px 32px",
+          }}
         >
           Book nå
         </Link>

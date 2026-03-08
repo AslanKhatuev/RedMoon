@@ -12,17 +12,22 @@ export default function HomePage() {
         justifyContent: "center",
         backgroundColor: "#050505",
         overflow: "hidden",
+        padding: "80px 24px 120px",
       }}
     >
-      {/* Content */}
+      {/* Glow */}
       <div
         style={{
-          textAlign: "center",
-          padding: "0 24px",
-          maxWidth: "900px",
-          paddingBottom: "120px",
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          background:
+            "radial-gradient(ellipse at center, rgba(212,168,67,0.05) 0%, transparent 70%)",
         }}
-      >
+      />
+
+      {/* Content */}
+      <div style={{ textAlign: "center", width: "100%", maxWidth: "900px" }}>
         <p
           style={{
             fontFamily: "Space Mono, monospace",
@@ -30,7 +35,7 @@ export default function HomePage() {
             fontSize: "10px",
             textTransform: "uppercase",
             color: "rgba(212,168,67,0.6)",
-            marginBottom: "32px",
+            marginBottom: "24px",
           }}
         >
           Foto · Video · Kunst
@@ -47,7 +52,7 @@ export default function HomePage() {
           <span
             style={{
               display: "block",
-              fontSize: "clamp(3rem,10vw,9rem)",
+              fontSize: "clamp(3.5rem,12vw,9rem)",
               color: "#e0e0e0",
             }}
           >
@@ -56,7 +61,7 @@ export default function HomePage() {
           <span
             style={{
               display: "block",
-              fontSize: "clamp(3rem,10vw,9rem)",
+              fontSize: "clamp(3.5rem,12vw,9rem)",
               color: "#e8c46a",
               fontStyle: "italic",
             }}
@@ -71,13 +76,13 @@ export default function HomePage() {
             alignItems: "center",
             justifyContent: "center",
             gap: "24px",
-            margin: "32px 0",
+            margin: "24px 0",
           }}
         >
           <div
             style={{
               height: "1px",
-              width: "64px",
+              width: "48px",
               background:
                 "linear-gradient(to right, transparent, rgba(212,168,67,0.4))",
             }}
@@ -86,7 +91,7 @@ export default function HomePage() {
           <div
             style={{
               height: "1px",
-              width: "64px",
+              width: "48px",
               background:
                 "linear-gradient(to left, transparent, rgba(212,168,67,0.4))",
             }}
@@ -98,10 +103,10 @@ export default function HomePage() {
             fontFamily: "Montserrat, sans-serif",
             fontWeight: 300,
             color: "rgba(200,200,200,0.55)",
-            maxWidth: "420px",
+            maxWidth: "380px",
             margin: "0 auto 40px",
             lineHeight: 1.8,
-            fontSize: "15px",
+            fontSize: "clamp(13px,2vw,15px)",
           }}
         >
           Profesjonell foto- og videografi for bryllup, arrangementer og
@@ -111,7 +116,7 @@ export default function HomePage() {
         <div
           style={{
             display: "flex",
-            gap: "16px",
+            gap: "12px",
             justifyContent: "center",
             flexWrap: "wrap",
           }}
@@ -119,7 +124,7 @@ export default function HomePage() {
           <Link
             href="/kontakt"
             style={{
-              padding: "14px 40px",
+              padding: "14px 32px",
               backgroundColor: "#d4a843",
               color: "#050505",
               fontFamily: "Montserrat, sans-serif",
@@ -127,6 +132,7 @@ export default function HomePage() {
               letterSpacing: "0.3em",
               textTransform: "uppercase",
               textDecoration: "none",
+              whiteSpace: "nowrap",
             }}
           >
             Book din sesjon
@@ -134,7 +140,7 @@ export default function HomePage() {
           <Link
             href="/galleri"
             style={{
-              padding: "14px 40px",
+              padding: "14px 32px",
               border: "1px solid rgba(200,200,200,0.2)",
               color: "rgba(200,200,200,0.55)",
               fontFamily: "Montserrat, sans-serif",
@@ -142,6 +148,7 @@ export default function HomePage() {
               letterSpacing: "0.3em",
               textTransform: "uppercase",
               textDecoration: "none",
+              whiteSpace: "nowrap",
             }}
           >
             Se galleri
@@ -164,13 +171,14 @@ export default function HomePage() {
           style={{
             maxWidth: "800px",
             margin: "0 auto",
-            padding: "20px 24px",
+            padding: "16px 24px",
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr",
+            gap: "8px",
           }}
         >
           {[
-            { num: "200+", label: "Bryllup dokumentert" },
+            { num: "200+", label: "Bryllup" },
             { num: "5★", label: "Vurdering" },
             { num: "8 år", label: "Erfaring" },
           ].map((s) => (
@@ -178,7 +186,7 @@ export default function HomePage() {
               <p
                 style={{
                   fontFamily: "Cormorant Garamond, serif",
-                  fontSize: "22px",
+                  fontSize: "clamp(18px,4vw,22px)",
                   color: "#e8c46a",
                   fontWeight: 300,
                 }}
@@ -188,7 +196,7 @@ export default function HomePage() {
               <p
                 style={{
                   fontFamily: "Space Mono, monospace",
-                  fontSize: "8px",
+                  fontSize: "clamp(7px,1.5vw,9px)",
                   color: "rgba(200,200,200,0.35)",
                   textTransform: "uppercase",
                   letterSpacing: "0.2em",

@@ -58,6 +58,23 @@ body {
   background: linear-gradient(90deg, transparent, #d4a843, transparent);
 }
 
+.hidden-mobile {
+  display: flex;
+}
+
+.show-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+  .show-mobile {
+    display: block !important;
+  }
+}
+
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }

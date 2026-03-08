@@ -57,7 +57,7 @@ export default function KontaktPage() {
     >
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "80px" }}>
+        <div style={{ textAlign: "center", marginBottom: "60px" }}>
           <p
             style={{
               fontFamily: "Space Mono, monospace",
@@ -73,7 +73,7 @@ export default function KontaktPage() {
           <h1
             style={{
               fontFamily: "Cormorant Garamond, serif",
-              fontSize: "clamp(2.5rem,6vw,5rem)",
+              fontSize: "clamp(2rem,6vw,5rem)",
               fontWeight: 300,
               color: "#e0e0e0",
               marginBottom: "24px",
@@ -92,11 +92,13 @@ export default function KontaktPage() {
           />
         </div>
 
+        {/* Grid – stacker på mobil */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "80px",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+            gap: "48px",
           }}
         >
           {/* Venstre – info */}
@@ -104,12 +106,12 @@ export default function KontaktPage() {
             <p
               style={{
                 fontFamily: "Cormorant Garamond, serif",
-                fontSize: "2rem",
+                fontSize: "clamp(1.4rem,3vw,2rem)",
                 fontWeight: 300,
                 color: "#e0e0e0",
                 fontStyle: "italic",
                 lineHeight: 1.4,
-                marginBottom: "40px",
+                marginBottom: "36px",
               }}
             >
               "Hvert øyeblikk fortjener å bli husket."
@@ -126,23 +128,23 @@ export default function KontaktPage() {
                 style={{
                   display: "flex",
                   gap: "16px",
-                  marginBottom: "24px",
+                  marginBottom: "20px",
                   alignItems: "flex-start",
                 }}
               >
                 <div
                   style={{
-                    width: "40px",
-                    height: "40px",
+                    width: "36px",
+                    height: "36px",
+                    flexShrink: 0,
                     border: "1px solid rgba(212,168,67,0.2)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    flexShrink: 0,
                   }}
                 >
                   <span
-                    style={{ color: "rgba(212,168,67,0.5)", fontSize: "12px" }}
+                    style={{ color: "rgba(212,168,67,0.5)", fontSize: "10px" }}
                   >
                     ◆
                   </span>
@@ -155,7 +157,7 @@ export default function KontaktPage() {
                       color: "rgba(200,200,200,0.4)",
                       textTransform: "uppercase",
                       letterSpacing: "0.2em",
-                      marginBottom: "4px",
+                      marginBottom: "3px",
                     }}
                   >
                     {label}
@@ -175,7 +177,7 @@ export default function KontaktPage() {
             ))}
 
             {/* Prosess */}
-            <div style={{ marginTop: "48px" }}>
+            <div style={{ marginTop: "40px" }}>
               <p
                 style={{
                   fontFamily: "Space Mono, monospace",
@@ -183,23 +185,23 @@ export default function KontaktPage() {
                   color: "rgba(212,168,67,0.5)",
                   textTransform: "uppercase",
                   letterSpacing: "0.4em",
-                  marginBottom: "24px",
+                  marginBottom: "20px",
                 }}
               >
                 Prosessen
               </p>
               {[
                 { num: "01", text: "Send oss en forespørsel" },
-                { num: "02", text: "Vi avtaler et gratis konsultasjonsmøte" },
-                { num: "03", text: "Vi skaper noe uforglemmelig sammen" },
+                { num: "02", text: "Gratis konsultasjonsmøte" },
+                { num: "03", text: "Vi skaper noe uforglemmelig" },
               ].map((step) => (
                 <div
                   key={step.num}
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "16px",
-                    marginBottom: "16px",
+                    gap: "12px",
+                    marginBottom: "14px",
                   }}
                 >
                   <span
@@ -207,6 +209,7 @@ export default function KontaktPage() {
                       fontFamily: "Space Mono, monospace",
                       fontSize: "11px",
                       color: "rgba(212,168,67,0.4)",
+                      flexShrink: 0,
                     }}
                   >
                     {step.num}
@@ -221,7 +224,7 @@ export default function KontaktPage() {
                   <span
                     style={{
                       fontFamily: "Montserrat, sans-serif",
-                      fontSize: "13px",
+                      fontSize: "12px",
                       fontWeight: 300,
                       color: "rgba(200,200,200,0.5)",
                     }}
@@ -241,7 +244,7 @@ export default function KontaktPage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
                 gap: "12px",
               }}
             >

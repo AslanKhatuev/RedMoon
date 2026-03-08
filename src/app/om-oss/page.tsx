@@ -12,7 +12,7 @@ export default function OmOssPage() {
     >
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "80px" }}>
+        <div style={{ textAlign: "center", marginBottom: "60px" }}>
           <p
             style={{
               fontFamily: "Space Mono, monospace",
@@ -28,7 +28,7 @@ export default function OmOssPage() {
           <h1
             style={{
               fontFamily: "Cormorant Garamond, serif",
-              fontSize: "clamp(2.5rem,6vw,5rem)",
+              fontSize: "clamp(2rem,6vw,5rem)",
               fontWeight: 300,
               color: "#e0e0e0",
               marginBottom: "24px",
@@ -47,26 +47,27 @@ export default function OmOssPage() {
           />
         </div>
 
-        {/* Om tekst */}
+        {/* Om tekst – stacker på mobil */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "80px",
-            alignItems: "center",
-            marginBottom: "100px",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+            gap: "48px",
+            alignItems: "start",
+            marginBottom: "80px",
           }}
         >
           <div>
             <p
               style={{
                 fontFamily: "Cormorant Garamond, serif",
-                fontSize: "2rem",
+                fontSize: "clamp(1.4rem,3vw,2rem)",
                 fontWeight: 300,
                 color: "#e0e0e0",
                 fontStyle: "italic",
                 lineHeight: 1.4,
-                marginBottom: "32px",
+                marginBottom: "24px",
               }}
             >
               "Kunsten å fortelle historier gjennom linsen"
@@ -78,7 +79,7 @@ export default function OmOssPage() {
                 fontWeight: 300,
                 color: "rgba(200,200,200,0.6)",
                 lineHeight: 1.9,
-                marginBottom: "20px",
+                marginBottom: "16px",
               }}
             >
               Vi er et dedikert team av fotografer og videografer med lidenskap
@@ -104,7 +105,7 @@ export default function OmOssPage() {
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: "24px",
+              gap: "20px",
             }}
           >
             {[
@@ -147,6 +148,7 @@ export default function OmOssPage() {
                     fontFamily: "Space Mono, monospace",
                     fontSize: "10px",
                     color: "rgba(200,200,200,0.4)",
+                    lineHeight: 1.5,
                   }}
                 >
                   {item.desc}
@@ -174,11 +176,11 @@ export default function OmOssPage() {
           <h2
             style={{
               fontFamily: "Cormorant Garamond, serif",
-              fontSize: "clamp(2rem,4vw,3.5rem)",
+              fontSize: "clamp(1.8rem,4vw,3.5rem)",
               fontWeight: 300,
               color: "#e0e0e0",
               textAlign: "center",
-              marginBottom: "48px",
+              marginBottom: "40px",
             }}
           >
             Anmeldelser
@@ -187,32 +189,29 @@ export default function OmOssPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+              gridTemplateColumns:
+                "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
               gap: "2px",
             }}
           >
             {TESTIMONIALS.map((t) => (
               <div
                 key={t.id}
-                style={{
-                  backgroundColor: "#0a0a0a",
-                  padding: "40px 32px",
-                  position: "relative",
-                }}
+                style={{ backgroundColor: "#0a0a0a", padding: "32px 24px" }}
               >
                 <div
                   style={{
                     fontFamily: "Cormorant Garamond, serif",
-                    fontSize: "80px",
+                    fontSize: "64px",
                     color: "rgba(212,168,67,0.08)",
                     lineHeight: 1,
-                    marginBottom: "16px",
+                    marginBottom: "12px",
                   }}
                 >
                   "
                 </div>
                 <div
-                  style={{ display: "flex", gap: "4px", marginBottom: "20px" }}
+                  style={{ display: "flex", gap: "4px", marginBottom: "16px" }}
                 >
                   {Array.from({ length: t.rating }).map((_, i) => (
                     <span
@@ -226,12 +225,12 @@ export default function OmOssPage() {
                 <p
                   style={{
                     fontFamily: "Cormorant Garamond, serif",
-                    fontSize: "18px",
+                    fontSize: "clamp(16px,2.5vw,18px)",
                     fontWeight: 300,
                     color: "#e0e0e0",
                     fontStyle: "italic",
                     lineHeight: 1.7,
-                    marginBottom: "24px",
+                    marginBottom: "20px",
                   }}
                 >
                   "{t.text}"
@@ -240,7 +239,7 @@ export default function OmOssPage() {
                   style={{
                     height: "1px",
                     background: "linear-gradient(90deg, #d4a843, transparent)",
-                    marginBottom: "16px",
+                    marginBottom: "14px",
                   }}
                 />
                 <p
