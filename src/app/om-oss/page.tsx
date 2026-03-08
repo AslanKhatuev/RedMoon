@@ -1,6 +1,24 @@
 import { TESTIMONIALS } from "@/lib/data";
+import { getTestimonials, getAboutPage } from "@/lib/strapi";
 
-export default function OmOssPage() {
+export default async function OmOssPage() {
+  const [testimonials_raw, aboutPage] = await Promise.all([
+    getTestimonials(),
+    getAboutPage(),
+  ]);
+  let testimonials = testimonials_raw;
+  if (!testimonials || testimonials.length === 0) {
+    testimonials = TESTIMONIALS;
+  } else {
+    testimonials = testimonials.map((t: any) => ({
+      id: t.id,
+      name: t.name,
+      text: t.text,
+      rating: t.rating,
+      service: t.service,
+      date: t.date,
+    }));
+  }
   return (
     <main
       style={{
@@ -70,7 +88,7 @@ export default function OmOssPage() {
                 marginBottom: "24px",
               }}
             >
-              "Kunsten å fortelle historier gjennom linsen"
+              {aboutPage?.quto || "Kunsten å fortelle historier gjennom linsen"}
             </p>
             <p
               style={{
@@ -82,9 +100,8 @@ export default function OmOssPage() {
                 marginBottom: "16px",
               }}
             >
-              Vi er et dedikert team av fotografer og videografer med lidenskap
-              for å fange livets viktigste øyeblikk. Fra bryllupets første dans
-              til lovzarens fulle intensitet – vi er der med kameraet.
+              {aboutPage?.paragraph1 ||
+                "Vi er et dedikert team av fotografer og videografer med lidenskap for å fange livets viktigste øyeblikk."}
             </p>
             <p
               style={{
@@ -95,8 +112,8 @@ export default function OmOssPage() {
                 lineHeight: 1.9,
               }}
             >
-              Vi spesialiserer oss på kulturelle bryllup og arrangementer, og
-              forstår dybden og skjønnheten i tradisjonelle seremonier.
+              {aboutPage?.paragraph2 ||
+                "Vi spesialiserer oss på kulturelle bryllup og arrangementer, og forstår dybden og skjønnheten i tradisjonelle seremonier."}
             </p>
           </div>
 
@@ -194,7 +211,7 @@ export default function OmOssPage() {
               gap: "2px",
             }}
           >
-            {TESTIMONIALS.map((t) => (
+            {testimonials.map((t: any) => (
               <div
                 key={t.id}
                 style={{ backgroundColor: "#0a0a0a", padding: "32px 24px" }}

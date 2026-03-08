@@ -1,10 +1,25 @@
-"use client";
-
+import { getServices } from "@/lib/strapi";
 import { SERVICES } from "@/lib/data";
 
-export default function TjenesterPage() {
-  const videoServices = SERVICES.filter((s) => s.category === "video");
-  const photoServices = SERVICES.filter((s) => s.category === "photo");
+export default async function TjenesterPage() {
+  let services = await getServices();
+
+  // Bruk placeholder-data hvis Strapi er tom
+  if (!services || services.length === 0) {
+    services = SERVICES.map((s) => ({ ...s }));
+  } else {
+    services = services.map((s: any) => ({
+      id: s.id,
+      title: s.title,
+      description: s.description,
+      icon: s.icon,
+      category: s.category,
+      slug: s.slug,
+    }));
+  }
+
+  const videoServices = services.filter((s: any) => s.category === "video");
+  const photoServices = services.filter((s: any) => s.category === "photo");
 
   return (
     <main
@@ -53,124 +68,122 @@ export default function TjenesterPage() {
         </div>
 
         {/* Video */}
-        <div style={{ marginBottom: "48px" }}>
-          <p
-            style={{
-              fontFamily: "Space Mono, monospace",
-              fontSize: "10px",
-              letterSpacing: "0.4em",
-              textTransform: "uppercase",
-              color: "rgba(212,168,67,0.5)",
-              marginBottom: "24px",
-            }}
-          >
-            — Video
-          </p>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
-              gap: "2px",
-            }}
-          >
-            {videoServices.map((service) => (
-              <div
-                key={service.id}
-                style={{
-                  backgroundColor: "#0a0a0a",
-                  padding: "28px 24px",
-                }}
-              >
-                <div style={{ fontSize: "26px", marginBottom: "12px" }}>
-                  {service.icon}
+        {videoServices.length > 0 && (
+          <div style={{ marginBottom: "48px" }}>
+            <p
+              style={{
+                fontFamily: "Space Mono, monospace",
+                fontSize: "10px",
+                letterSpacing: "0.4em",
+                textTransform: "uppercase",
+                color: "rgba(212,168,67,0.5)",
+                marginBottom: "24px",
+              }}
+            >
+              — Video
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
+                gap: "2px",
+              }}
+            >
+              {videoServices.map((service: any) => (
+                <div
+                  key={service.id}
+                  style={{ backgroundColor: "#0a0a0a", padding: "28px 24px" }}
+                >
+                  <div style={{ fontSize: "26px", marginBottom: "12px" }}>
+                    {service.icon}
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "Cormorant Garamond, serif",
+                      fontSize: "clamp(18px,3vw,22px)",
+                      fontWeight: 300,
+                      color: "#e0e0e0",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "Montserrat, sans-serif",
+                      fontSize: "13px",
+                      fontWeight: 300,
+                      color: "rgba(200,200,200,0.5)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {service.description}
+                  </p>
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "Cormorant Garamond, serif",
-                    fontSize: "clamp(18px,3vw,22px)",
-                    fontWeight: 300,
-                    color: "#e0e0e0",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {service.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "Montserrat, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: 300,
-                    color: "rgba(200,200,200,0.5)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {service.description}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Foto */}
-        <div>
-          <p
-            style={{
-              fontFamily: "Space Mono, monospace",
-              fontSize: "10px",
-              letterSpacing: "0.4em",
-              textTransform: "uppercase",
-              color: "rgba(212,168,67,0.5)",
-              marginBottom: "24px",
-            }}
-          >
-            — Foto
-          </p>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
-              gap: "2px",
-            }}
-          >
-            {photoServices.map((service) => (
-              <div
-                key={service.id}
-                style={{
-                  backgroundColor: "#0a0a0a",
-                  padding: "28px 24px",
-                }}
-              >
-                <div style={{ fontSize: "26px", marginBottom: "12px" }}>
-                  {service.icon}
+        {photoServices.length > 0 && (
+          <div>
+            <p
+              style={{
+                fontFamily: "Space Mono, monospace",
+                fontSize: "10px",
+                letterSpacing: "0.4em",
+                textTransform: "uppercase",
+                color: "rgba(212,168,67,0.5)",
+                marginBottom: "24px",
+              }}
+            >
+              — Foto
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
+                gap: "2px",
+              }}
+            >
+              {photoServices.map((service: any) => (
+                <div
+                  key={service.id}
+                  style={{ backgroundColor: "#0a0a0a", padding: "28px 24px" }}
+                >
+                  <div style={{ fontSize: "26px", marginBottom: "12px" }}>
+                    {service.icon}
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "Cormorant Garamond, serif",
+                      fontSize: "clamp(18px,3vw,22px)",
+                      fontWeight: 300,
+                      color: "#e0e0e0",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "Montserrat, sans-serif",
+                      fontSize: "13px",
+                      fontWeight: 300,
+                      color: "rgba(200,200,200,0.5)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {service.description}
+                  </p>
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "Cormorant Garamond, serif",
-                    fontSize: "clamp(18px,3vw,22px)",
-                    fontWeight: 300,
-                    color: "#e0e0e0",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {service.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "Montserrat, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: 300,
-                    color: "rgba(200,200,200,0.5)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {service.description}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </main>
   );

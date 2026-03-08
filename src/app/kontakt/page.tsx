@@ -27,11 +27,36 @@ export default function KontaktPage() {
   });
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    try {
+      const res = await fetch(
+        `http://localhost:1337/api/contact-submissions`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: formData }),
+        }
+      );
+      if (res.ok) {
+        setSent(true);
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          service: "",
+          date: "",
+          message: "",
+        });
+        setTimeout(() => setSent(false), 4000);
+      } else {
+        alert("Noe gikk galt, prøv igjen.");
+      }
+    } catch (err) {
+      alert("Kunne ikke koble til serveren.");
+    }
   };
 
   const inputStyle = {
