@@ -190,55 +190,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* Stats */}
-      <div
-        style={{
-          position: "relative",
-          zIndex: 1,
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
-          borderTop: "1px solid rgba(255,255,255,0.05)",
-          backgroundColor: "rgba(5,5,5,0.8)",
-        }}
-      >
-        {[
-          { num: "200+", label: "Bryllup" },
-          { num: "5★", label: "Vurdering" },
-          { num: "8 år", label: "Erfaring" },
-        ].map((stat) => (
-          <div
-            key={stat.label}
-            style={{
-              padding: "24px",
-              textAlign: "center",
-              borderRight: "1px solid rgba(255,255,255,0.05)",
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "Cormorant Garamond, serif",
-                fontSize: "clamp(1.5rem,4vw,2.5rem)",
-                color: "#ffffff",
-                fontWeight: 300,
-              }}
-            >
-              {stat.num}
-            </p>
-            <p
-              style={{
-                fontFamily: "Space Mono, monospace",
-                fontSize: "9px",
-                color: "rgba(255,255,255,0.4)",
-                textTransform: "uppercase",
-                letterSpacing: "0.3em",
-                marginTop: "4px",
-              }}
-            >
-              {stat.label}
-            </p>
-          </div>
-        ))}
-      </div>
+      
 
       {/* Featured seksjon */}
       {featured && (
