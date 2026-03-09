@@ -56,11 +56,14 @@ export default function KontaktPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:1337/api/contact-submissions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: formData }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/contact-submissions`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data: formData }),
+        }
+      );
       if (res.ok) {
         setSent(true);
         setFormData({
