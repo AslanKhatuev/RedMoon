@@ -36,6 +36,7 @@ body {
   background-color: #050505;
   color: #c8c8c8;
   overflow-x: hidden;
+  top: 0 !important;
 }
 
 ::-webkit-scrollbar { width: 4px; }
@@ -73,6 +74,16 @@ body {
   .show-mobile {
     display: block !important;
   }
+}
+
+/* Google Translate – skjul alt */
+.skiptranslate iframe,
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-te-combo {
+  display: none !important;
 }
 
 @keyframes shimmer {

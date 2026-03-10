@@ -6,6 +6,120 @@ import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/lib/data";
 import { Menu, X } from "lucide-react";
 
+function LanguageSelector({ mobile = false }: { mobile?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("NO");
+
+  const languages = [
+    { code: "no", label: "NO" },
+    { code: "en", label: "EN" },
+    { code: "ru", label: "RU" },
+  ];
+
+  // Les valgt språk fra cookie ved oppstart
+  useEffect(() => {
+    const match = document.cookie.match(/googtrans=\/no\/(\w+)/);
+    if (match) {
+      const code = match[1].toUpperCase();
+      const found = languages.find((l) => l.code === match[1]);
+      if (found) setSelected(found.label);
+    }
+  }, []);
+
+  const handleSelect = (code: string, label: string) => {
+    setSelected(label);
+    setOpen(false);
+    if (code === "no") {
+      document.cookie =
+        "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie =
+        "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" +
+        window.location.hostname;
+    } else {
+      document.cookie = `googtrans=/no/${code}; path=/`;
+      document.cookie = `googtrans=/no/${code}; path=/; domain=${window.location.hostname}`;
+    }
+    window.location.reload();
+  };
+
+  return (
+    <div className="notranslate" style={{ position: "relative" }}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="notranslate"
+        style={{
+          fontFamily: "Montserrat, sans-serif",
+          fontSize: mobile ? "11px" : "10px",
+          letterSpacing: "0.3em",
+          color: "#ffffff",
+          backgroundColor: "transparent",
+          border: "1px solid rgba(255,255,255,0.5)",
+          padding: mobile ? "12px 32px" : "10px 24px",
+          cursor: "pointer",
+          textTransform: "uppercase",
+          marginTop: mobile ? "16px" : "0",
+        }}
+      >
+        {selected} ▾
+      </button>
+      {open && (
+        <div
+          style={{
+            position: "absolute",
+            top: "calc(100% + 8px)",
+            right: mobile ? "auto" : 0,
+            left: mobile ? "50%" : "auto",
+            transform: mobile ? "translateX(-50%)" : "none",
+            backgroundColor: "#0a0a0a",
+            border: "1px solid rgba(255,255,255,0.1)",
+            zIndex: 100,
+            minWidth: "100px",
+          }}
+        >
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              onClick={() => handleSelect(lang.code, lang.label)}
+              className="notranslate"
+              style={{
+                display: "block",
+                width: "100%",
+                padding: "10px 24px",
+                fontFamily: "Montserrat, sans-serif",
+                fontSize: "10px",
+                letterSpacing: "0.3em",
+                color:
+                  selected === lang.label ? "#ffffff" : "rgba(255,255,255,0.5)",
+                backgroundColor: "transparent",
+                border: "none",
+                cursor: "pointer",
+                textAlign: "center",
+                textTransform: "uppercase",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#111111")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = "transparent")
+              }
+            >
+              {lang.label}
+            </button>
+          ))}
+        </div>
+      )}
+      <div
+        id={
+          mobile
+            ? "google_translate_element_mobile"
+            : "google_translate_element"
+        }
+        style={{ display: "none" }}
+      />
+    </div>
+  );
+}
+
 function BookButton({ mobile = false }: { mobile?: boolean }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -13,7 +127,7 @@ function BookButton({ mobile = false }: { mobile?: boolean }) {
       href="/kontakt"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={mobile ? "" : "hidden-mobile"}
+      className={`notranslate ${mobile ? "" : "hidden-mobile"}`}
       style={{
         fontFamily: "Montserrat, sans-serif",
         fontSize: mobile ? "11px" : "10px",
@@ -75,7 +189,6 @@ export default function Navbar() {
             justifyContent: "space-between",
           }}
         >
-          {/* Logo */}
           <Link href="/" style={{ textDecoration: "none" }}>
             <img
               src="/redmoon_logo3.png"
@@ -89,7 +202,6 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop nav */}
           <ul
             style={{
               display: "flex",
@@ -128,10 +240,14 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Book nå knapp – desktop */}
-          <BookButton />
+          <div
+            className="hidden-mobile"
+            style={{ display: "flex", alignItems: "center", gap: "12px" }}
+          >
+            <LanguageSelector />
+            <BookButton />
+          </div>
 
-          {/* Hamburger */}
           <button
             className="show-mobile"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -148,7 +264,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobilmeny */}
       <div
         style={{
           position: "fixed",
@@ -194,6 +309,7 @@ export default function Navbar() {
           ))}
         </ul>
         <BookButton mobile />
+        <LanguageSelector mobile />
       </div>
     </>
   );
