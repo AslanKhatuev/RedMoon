@@ -190,8 +190,6 @@ export default async function HomePage() {
         </div>
       </div>
 
-      
-
       {/* Featured seksjon */}
       {featured && (
         <div
@@ -208,7 +206,8 @@ export default async function HomePage() {
           {featured.image?.url && (
             <div
               style={{
-                minHeight: "400px",
+                minHeight: "clamp(300px, 60vw, 600px)",
+                width: "100%",
                 backgroundImage: `url(${
                   featured.image.url.startsWith("http")
                     ? featured.image.url
