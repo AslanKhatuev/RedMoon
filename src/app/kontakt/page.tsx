@@ -16,28 +16,213 @@ const SERVICES_LIST = [
   "Annet",
 ];
 
-function SubmitButton({ sent }: { sent: boolean }) {
+function SuccessModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 999,
+        backgroundColor: "rgba(5,5,5,0.85)",
+        backdropFilter: "blur(12px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "24px",
+        animation: "fadeIn 0.4s ease",
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          backgroundColor: "#0a0a0a",
+          border: "1px solid rgba(255,255,255,0.1)",
+          maxWidth: "480px",
+          width: "100%",
+          padding: "clamp(40px, 6vw, 64px)",
+          textAlign: "center",
+          position: "relative",
+          animation: "slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        {/* Rød sirkel øverst */}
+        <div
+          style={{
+            width: "56px",
+            height: "56px",
+            borderRadius: "50%",
+            backgroundColor: "rgba(204,0,0,0.1)",
+            border: "1px solid rgba(204,0,0,0.3)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "0 auto 28px",
+          }}
+        >
+          <span style={{ color: "#cc0000", fontSize: "22px" }}>✓</span>
+        </div>
+
+        {/* Dekor */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            marginBottom: "20px",
+          }}
+        >
+          <div
+            style={{
+              width: "40px",
+              height: "1px",
+              backgroundColor: "rgba(255,255,255,0.1)",
+            }}
+          />
+          <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "7px" }}>
+            ◆
+          </span>
+          <div
+            style={{
+              width: "40px",
+              height: "1px",
+              backgroundColor: "rgba(255,255,255,0.1)",
+            }}
+          />
+        </div>
+
+        <h2
+          style={{
+            fontFamily: "Cormorant Garamond, serif",
+            fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+            fontWeight: 300,
+            color: "#ffffff",
+            marginBottom: "16px",
+            letterSpacing: "0.05em",
+          }}
+        >
+          Takk for din henvendelse
+        </h2>
+
+        <p
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "13px",
+            fontWeight: 300,
+            color: "rgba(255,255,255,0.5)",
+            lineHeight: 1.8,
+            marginBottom: "36px",
+          }}
+        >
+          Vi har mottatt meldingen din og tar kontakt innen 24 timer.
+        </p>
+
+        <button
+          onClick={onClose}
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "10px",
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+            color: "#ffffff",
+            backgroundColor: "transparent",
+            border: "1px solid rgba(255,255,255,0.3)",
+            padding: "12px 36px",
+            cursor: "pointer",
+            transition: "all 0.3s",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "#ffffff";
+            e.currentTarget.style.color = "#050505";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+            e.currentTarget.style.color = "#ffffff";
+          }}
+        >
+          Lukk
+        </button>
+
+        {/* Hjørndekor */}
+        <div
+          style={{
+            position: "absolute",
+            top: "16px",
+            left: "16px",
+            width: "20px",
+            height: "20px",
+            borderTop: "1px solid rgba(255,255,255,0.15)",
+            borderLeft: "1px solid rgba(255,255,255,0.15)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: "16px",
+            right: "16px",
+            width: "20px",
+            height: "20px",
+            borderTop: "1px solid rgba(255,255,255,0.15)",
+            borderRight: "1px solid rgba(255,255,255,0.15)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "16px",
+            left: "16px",
+            width: "20px",
+            height: "20px",
+            borderBottom: "1px solid rgba(255,255,255,0.15)",
+            borderLeft: "1px solid rgba(255,255,255,0.15)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "16px",
+            right: "16px",
+            width: "20px",
+            height: "20px",
+            borderBottom: "1px solid rgba(255,255,255,0.15)",
+            borderRight: "1px solid rgba(255,255,255,0.15)",
+          }}
+        />
+      </div>
+
+      <style>{`
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      `}</style>
+    </div>
+  );
+}
+
+function SubmitButton({ loading }: { loading: boolean }) {
   const [hovered, setHovered] = useState(false);
   return (
     <button
       type="submit"
+      disabled={loading}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         padding: "16px",
-        backgroundColor: hovered ? "rgba(255,255,255,0.9)" : "#ffffff",
+        backgroundColor:
+          hovered && !loading ? "rgba(255,255,255,0.9)" : "#ffffff",
         color: "#050505",
         fontFamily: "Montserrat, sans-serif",
         fontSize: "11px",
         letterSpacing: "0.3em",
         textTransform: "uppercase",
         border: "none",
-        cursor: "pointer",
-        opacity: hovered ? 0.85 : 1,
+        cursor: loading ? "not-allowed" : "pointer",
+        opacity: loading ? 0.6 : 1,
         transition: "opacity 0.3s",
       }}
     >
-      {sent ? "Sendt! Vi kontakter deg snart ✓" : "Send forespørsel"}
+      {loading ? "Sender..." : "Send forespørsel"}
     </button>
   );
 }
@@ -51,10 +236,12 @@ export default function KontaktPage() {
     date: "",
     message: "",
   });
-  const [sent, setSent] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/contact-submissions`,
@@ -65,7 +252,7 @@ export default function KontaktPage() {
         }
       );
       if (res.ok) {
-        setSent(true);
+        setShowModal(true);
         setFormData({
           name: "",
           phone: "",
@@ -74,12 +261,13 @@ export default function KontaktPage() {
           date: "",
           message: "",
         });
-        setTimeout(() => setSent(false), 4000);
       } else {
         alert("Noe gikk galt, prøv igjen.");
       }
-    } catch (err) {
+    } catch {
       alert("Kunne ikke koble til serveren.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -104,6 +292,8 @@ export default function KontaktPage() {
         paddingBottom: "80px",
       }}
     >
+      {showModal && <SuccessModal onClose={() => setShowModal(false)} />}
+
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "60px" }}>
@@ -167,7 +357,7 @@ export default function KontaktPage() {
             </p>
 
             {[
-              { label: "Telefon", value: "+47 968 56 978 " },
+              { label: "Telefon", value: "+47 968 56 978" },
               { label: "E-post", value: "post@redmoon.no" },
               { label: "Instagram", value: "@redmoon_usm" },
               { label: "Lokasjon", value: "Oslo, Norge" },
@@ -225,7 +415,6 @@ export default function KontaktPage() {
               </div>
             ))}
 
-            {/* Prosess */}
             <div style={{ marginTop: "40px" }}>
               <p
                 style={{
@@ -364,7 +553,7 @@ export default function KontaktPage() {
               }
               style={{ ...inputStyle, resize: "none" }}
             />
-            <SubmitButton sent={sent} />
+            <SubmitButton loading={loading} />
             <p
               style={{
                 textAlign: "center",
