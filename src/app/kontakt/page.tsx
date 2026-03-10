@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SERVICES_LIST = [
   "Bryllupsfilm",
@@ -40,13 +40,13 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
           border: "1px solid rgba(255,255,255,0.1)",
           maxWidth: "480px",
           width: "100%",
-          padding: "clamp(40px, 6vw, 64px)",
+          padding: "clamp(32px, 6vw, 64px)",
           textAlign: "center",
           position: "relative",
           animation: "slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+          margin: "0 16px",
         }}
       >
-        {/* Rød sirkel øverst */}
         <div
           style={{
             width: "56px",
@@ -62,8 +62,6 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
         >
           <span style={{ color: "#cc0000", fontSize: "22px" }}>✓</span>
         </div>
-
-        {/* Dekor */}
         <div
           style={{
             display: "flex",
@@ -91,11 +89,10 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
             }}
           />
         </div>
-
         <h2
           style={{
             fontFamily: "Cormorant Garamond, serif",
-            fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+            fontSize: "clamp(1.6rem, 5vw, 2.8rem)",
             fontWeight: 300,
             color: "#ffffff",
             marginBottom: "16px",
@@ -104,11 +101,10 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
         >
           Takk for din henvendelse
         </h2>
-
         <p
           style={{
             fontFamily: "Montserrat, sans-serif",
-            fontSize: "13px",
+            fontSize: "clamp(12px, 2vw, 13px)",
             fontWeight: 300,
             color: "rgba(255,255,255,0.5)",
             lineHeight: 1.8,
@@ -117,7 +113,6 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
         >
           Vi har mottatt meldingen din og tar kontakt innen 24 timer.
         </p>
-
         <button
           onClick={onClose}
           style={{
@@ -131,6 +126,8 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
             padding: "12px 36px",
             cursor: "pointer",
             transition: "all 0.3s",
+            width: "100%",
+            maxWidth: "200px",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = "#ffffff";
@@ -143,8 +140,6 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
         >
           Lukk
         </button>
-
-        {/* Hjørndekor */}
         <div
           style={{
             position: "absolute",
@@ -190,7 +185,6 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
           }}
         />
       </div>
-
       <style>{`
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -220,6 +214,8 @@ function SubmitButton({ loading }: { loading: boolean }) {
         cursor: loading ? "not-allowed" : "pointer",
         opacity: loading ? 0.6 : 1,
         transition: "opacity 0.3s",
+        width: "100%",
+        minHeight: "52px",
       }}
     >
       {loading ? "Sender..." : "Send forespørsel"}
@@ -238,6 +234,14 @@ export default function KontaktPage() {
   });
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -271,16 +275,19 @@ export default function KontaktPage() {
     }
   };
 
-  const inputStyle = {
+  const inputStyle: React.CSSProperties = {
     width: "100%",
     backgroundColor: "#111111",
     border: "1px solid rgba(255,255,255,0.08)",
     color: "#ffffff",
-    padding: "12px 16px",
-    fontSize: "13px",
+    padding: isMobile ? "14px 16px" : "12px 16px",
+    fontSize: isMobile ? "16px" : "13px", // 16px hindrer auto-zoom på iOS
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 300,
     outline: "none",
+    borderRadius: 0,
+    WebkitAppearance: "none",
+    appearance: "none",
   };
 
   return (
@@ -288,15 +295,26 @@ export default function KontaktPage() {
       style={{
         minHeight: "100vh",
         backgroundColor: "#050505",
-        paddingTop: "120px",
+        paddingTop: isMobile ? "100px" : "120px",
         paddingBottom: "80px",
       }}
     >
       {showModal && <SuccessModal onClose={() => setShowModal(false)} />}
 
-      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
+      <div
+        style={{
+          maxWidth: "1100px",
+          margin: "0 auto",
+          padding: isMobile ? "0 16px" : "0 24px",
+        }}
+      >
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "60px" }}>
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: isMobile ? "40px" : "60px",
+          }}
+        >
           <p
             style={{
               fontFamily: "Space Mono, monospace",
@@ -312,7 +330,7 @@ export default function KontaktPage() {
           <h1
             style={{
               fontFamily: "Cormorant Garamond, serif",
-              fontSize: "clamp(2rem,6vw,5rem)",
+              fontSize: "clamp(2.2rem, 8vw, 5rem)",
               fontWeight: 300,
               color: "#ffffff",
               marginBottom: "24px",
@@ -331,159 +349,179 @@ export default function KontaktPage() {
           />
         </div>
 
-        {/* Grid */}
+        {/* Grid – stacker på mobil */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
-            gap: "48px",
+            gridTemplateColumns: isMobile
+              ? "1fr"
+              : "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+            gap: isMobile ? "40px" : "48px",
           }}
         >
-          {/* Venstre – info */}
+          {/* Info */}
           <div>
             <p
               style={{
                 fontFamily: "Cormorant Garamond, serif",
-                fontSize: "clamp(1.4rem,3vw,2rem)",
+                fontSize: "clamp(1.3rem, 4vw, 2rem)",
                 fontWeight: 300,
                 color: "#ffffff",
                 fontStyle: "italic",
                 lineHeight: 1.4,
-                marginBottom: "36px",
+                marginBottom: "32px",
               }}
             >
               "Hvert øyeblikk fortjener å bli husket."
             </p>
 
-            {[
-              { label: "Telefon", value: "+47 968 56 978" },
-              { label: "E-post", value: "post@redmoon.no" },
-              { label: "Instagram", value: "@redmoon_usm" },
-              { label: "Lokasjon", value: "Oslo, Norge" },
-            ].map(({ label, value }) => (
-              <div
-                key={label}
-                style={{
-                  display: "flex",
-                  gap: "16px",
-                  marginBottom: "20px",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    flexShrink: 0,
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span
-                    style={{ color: "rgba(255,255,255,0.5)", fontSize: "10px" }}
-                  >
-                    ◆
-                  </span>
-                </div>
-                <div>
-                  <p
-                    style={{
-                      fontFamily: "Space Mono, monospace",
-                      fontSize: "9px",
-                      color: "rgba(255,255,255,0.4)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.2em",
-                      marginBottom: "3px",
-                    }}
-                  >
-                    {label}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "Montserrat, sans-serif",
-                      fontSize: "14px",
-                      fontWeight: 300,
-                      color: "#ffffff",
-                    }}
-                  >
-                    {value}
-                  </p>
-                </div>
-              </div>
-            ))}
-
-            <div style={{ marginTop: "40px" }}>
-              <p
-                style={{
-                  fontFamily: "Space Mono, monospace",
-                  fontSize: "9px",
-                  color: "rgba(255,255,255,0.4)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.4em",
-                  marginBottom: "20px",
-                }}
-              >
-                Prosessen
-              </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr",
+                gap: "16px",
+                marginBottom: "32px",
+              }}
+            >
               {[
-                { num: "01", text: "Send oss en forespørsel" },
-                { num: "02", text: "Gratis konsultasjonsmøte" },
-                { num: "03", text: "Vi skaper noe uforglemmelig" },
-              ].map((step) => (
+                { label: "Telefon", value: "+47 968 56 978" },
+                { label: "E-post", value: "post@redmoon.no" },
+                { label: "Instagram", value: "@redmoon_usm" },
+                { label: "Lokasjon", value: "Oslo, Norge" },
+              ].map(({ label, value }) => (
                 <div
-                  key={step.num}
+                  key={label}
                   style={{
                     display: "flex",
-                    alignItems: "center",
                     gap: "12px",
-                    marginBottom: "14px",
+                    alignItems: "flex-start",
                   }}
                 >
-                  <span
-                    style={{
-                      fontFamily: "Space Mono, monospace",
-                      fontSize: "11px",
-                      color: "rgba(255,255,255,0.4)",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {step.num}
-                  </span>
                   <div
                     style={{
-                      height: "1px",
-                      flex: 1,
-                      backgroundColor: "rgba(255,255,255,0.05)",
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: "Montserrat, sans-serif",
-                      fontSize: "12px",
-                      fontWeight: 300,
-                      color: "rgba(255,255,255,0.5)",
+                      width: "32px",
+                      height: "32px",
+                      flexShrink: 0,
+                      border: "1px solid rgba(255,255,255,0.2)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
-                    {step.text}
-                  </span>
+                    <span
+                      style={{
+                        color: "rgba(255,255,255,0.5)",
+                        fontSize: "9px",
+                      }}
+                    >
+                      ◆
+                    </span>
+                  </div>
+                  <div>
+                    <p
+                      style={{
+                        fontFamily: "Space Mono, monospace",
+                        fontSize: "9px",
+                        color: "rgba(255,255,255,0.4)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.2em",
+                        marginBottom: "3px",
+                      }}
+                    >
+                      {label}
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "Montserrat, sans-serif",
+                        fontSize: isMobile ? "12px" : "14px",
+                        fontWeight: 300,
+                        color: "#ffffff",
+                        wordBreak: "break-all",
+                      }}
+                    >
+                      {value}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
+
+            {/* Prosess – skjul på liten mobil for plass */}
+            {!isMobile && (
+              <div style={{ marginTop: "8px" }}>
+                <p
+                  style={{
+                    fontFamily: "Space Mono, monospace",
+                    fontSize: "9px",
+                    color: "rgba(255,255,255,0.4)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.4em",
+                    marginBottom: "20px",
+                  }}
+                >
+                  Prosessen
+                </p>
+                {[
+                  { num: "01", text: "Send oss en forespørsel" },
+                  { num: "02", text: "Gratis konsultasjonsmøte" },
+                  { num: "03", text: "Vi skaper noe uforglemmelig" },
+                ].map((step) => (
+                  <div
+                    key={step.num}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "Space Mono, monospace",
+                        fontSize: "11px",
+                        color: "rgba(255,255,255,0.4)",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {step.num}
+                    </span>
+                    <div
+                      style={{
+                        height: "1px",
+                        flex: 1,
+                        backgroundColor: "rgba(255,255,255,0.05)",
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "Montserrat, sans-serif",
+                        fontSize: "12px",
+                        fontWeight: 300,
+                        color: "rgba(255,255,255,0.5)",
+                      }}
+                    >
+                      {step.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Høyre – skjema */}
+          {/* Skjema */}
           <form
             onSubmit={handleSubmit}
-            style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: isMobile ? "14px" : "12px",
+            }}
           >
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-                gap: "12px",
+                gridTemplateColumns: "1fr 1fr",
+                gap: isMobile ? "14px" : "12px",
               }}
             >
               <input
@@ -545,7 +583,7 @@ export default function KontaktPage() {
               style={{ ...inputStyle, colorScheme: "dark" }}
             />
             <textarea
-              rows={5}
+              rows={isMobile ? 4 : 5}
               placeholder="Fortell oss om arrangementet ditt..."
               value={formData.message}
               onChange={(e) =>
