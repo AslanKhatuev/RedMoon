@@ -167,10 +167,10 @@ export default function KontaktPage() {
             </p>
 
             {[
-              { label: "Telefon", value: "+47 XXX XX XXX" },
+              { label: "Telefon", value: "+47 968 56 978 " },
               { label: "E-post", value: "post@redmoon.no" },
-              { label: "Instagram", value: "@redmoon.studio" },
-              { label: "Lokasjon", value: "Norge" },
+              { label: "Instagram", value: "@redmoon_usm" },
+              { label: "Lokasjon", value: "Oslo, Norge" },
             ].map(({ label, value }) => (
               <div
                 key={label}
