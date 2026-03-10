@@ -1,36 +1,162 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RedMoon Production
 
-## Getting Started
+> Profesjonell foto- og videoproduksjon – Next.js + Strapi CMS
 
-First, run the development server:
+**Live:** [red-moon-one.vercel.app](https://red-moon-one.vercel.app)  
+**CMS Admin:** [optimistic-splendor-b9f6192352.strapiapp.com/admin](https://optimistic-splendor-b9f6192352.strapiapp.com/admin)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Tech Stack
+
+| Lag | Teknologi |
+|-----|-----------|
+| Frontend | Next.js 14 (App Router), TypeScript |
+| Styling | Tailwind CSS v4 + inline styles |
+| CMS | Strapi v5 (Strapi Cloud) |
+| Deploy | Vercel (frontend) + Strapi Cloud (backend) |
+| Fonter | Cormorant Garamond, Montserrat, Space Mono |
+
+---
+
+## Prosjektstruktur
+
+redmoon/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx              # Root layout – Google Translate scripts
+│   │   ├── page.tsx                # Forside – Hero + Featured seksjon
+│   │   ├── tjenester/page.tsx      # Tjenester fra Strapi
+│   │   ├── galleri/page.tsx        # Bildegalleri med lightbox
+│   │   ├── om-oss/page.tsx         # Om oss + testimonials
+│   │   ├── kontakt/page.tsx        # Kontaktskjema
+│   │   └── prisliste/page.tsx      # Prisliste
+│   ├── components/
+│   │   └── layout/
+│   │       ├── Navbar.tsx          # Navigasjon + språkvelger + hamburger
+│   │       └── Footer.tsx          # Footer med logo, WhatsApp, Instagram
+│   ├── lib/
+│   │   ├── strapi.ts               # API-kall til Strapi
+│   │   └── data.ts                 # NAV_ITEMS, fallback-data
+│   └── types/
+│       └── index.ts                # TypeScript interfaces
+├── public/
+│   └── redmoon_logo3.png           # Logo (brukes i navbar, footer, prisliste)
+└── .env.local                      # Miljøvariabler (ikke i git)
+
+---
+
+## Sider
+
+| Rute | Beskrivelse |
+|------|-------------|
+| `/` | Forside med hero-bilde fra Strapi og featured seksjon |
+| `/tjenester` | Tjenestekort fra Strapi CMS |
+| `/galleri` | Bildegalleri med lightbox |
+| `/om-oss` | Om-oss tekst + kundeomtaler |
+| `/kontakt` | Kontaktskjema som sender til Strapi |
+| `/prisliste` | Statisk prisliste med fire pakker |
+
+---
+
+## Miljøvariabler
+
+Opprett `.env.local` i rotmappen:
+
+```env
+NEXT_PUBLIC_STRAPI_URL=https://optimistic-splendor-b9f6192352.strapiapp.com
+STRAPI_API_TOKEN=din_api_token_her
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Samme variabler må legges inn i **Vercel → Settings → Environment Variables**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Strapi CMS
 
-## Learn More
+### Collection Types
 
-To learn more about Next.js, take a look at the following resources:
+| Navn | Felt |
+|------|------|
+| `Service` | title, description, price, icon |
+| `GalleryItem` | title, media, category |
+| `Testimonial` | name, quote, role |
+| `ContactSubmission` | name, email, message, phone |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Single Types
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Navn | Felt |
+|------|------|
+| `HeroContent` | title, subtitle, description, backgroundImage |
+| `FeaturedSection` | title, subtitle, description, image |
+| `AboutPage` | quto, paragraph1, paragraph2 |
 
-## Deploy on Vercel
+### API-tilganger (Public rolle)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Alle content types: `find`, `findOne` ✅  
+ContactSubmission: `create` ✅
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Kjøre lokalt
+
+```bash
+# Installer avhengigheter
+npm install
+
+# Start utviklingsserver
+npm run dev
+
+# Bygg for produksjon
+npm run build
+```
+
+---
+
+## Deploy
+
+### Frontend (Vercel)
+
+```bash
+git add .
+git commit -m "din melding"
+git push
+
+```
+
+Vercel deployer automatisk ved push til `main`.
+
+### CMS (Strapi Cloud)
+
+Strapi-koden ligger i et eget repo:
+
+github.com/AslanKhatuev/strapi-cloud-template-blog-ac2071698b
+
+Strapi Cloud deployer automatisk ved push.
+
+---
+
+## Funksjoner
+
+- **Flerspråklig** – Google Translate med NO / EN / RU via cookie
+- **Responsiv** – Tilpasset mobil med hamburger-meny
+- **Dynamisk innhold** – Alt innhold styres fra Strapi Cloud
+- **Kontaktskjema** – Sender direkte til Strapi ContactSubmission
+- **Prisliste** – Statisk side med fire pakker
+- **Lightbox galleri** – Klikk på bilder for fullskjerm
+
+---
+
+## Kontaktinfo
+
+- **WhatsApp:** [+47 96 85 69 78](https://wa.me/4796856978)
+- **Instagram:** [@redmoon_usm](https://www.instagram.com/redmoon_usm)
+- **E-post:** <post@redmoon.no>
+
+---
+
+## Design
+
+- **Farger:** Svart `#050505` bakgrunn, hvit `#ffffff` tekst, rød `#cc0000` aksent
+- **Fonter:** Cormorant Garamond (display), Montserrat (body), Space Mono (mono)
+- **Stil:** Mørk luksus – minimalistisk med elegant typografi
