@@ -198,7 +198,7 @@ export default async function HomePage() {
             zIndex: 1,
             display: "grid",
             gridTemplateColumns:
-              "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              "repeat(auto-fit, minmax(min(100%, 480px), 1fr))",
             gap: "0",
             backgroundColor: "#0a0a0a",
           }}
