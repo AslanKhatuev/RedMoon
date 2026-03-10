@@ -1,9 +1,10 @@
 import { NavItem, Service, Testimonial } from "@/types";
 
-export const NAV_ITEMS: NavItem[] = [
+export const NAV_ITEMS = [
   { label: "Hjem", href: "/" },
   { label: "Tjenester", href: "/tjenester" },
   { label: "Galleri", href: "/galleri" },
+  { label: "Prisliste", href: "/prisliste" },
   { label: "Om oss", href: "/om-oss" },
   { label: "Kontakt", href: "/kontakt" },
 ];
