@@ -20,37 +20,12 @@ export default function Footer() {
           }}
         >
           {/* Logo */}
-          <Link
-            href="/"
-            style={{
-              textDecoration: "none",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "Cormorant Garamond, serif",
-                fontSize: "24px",
-                color: "#ffffff",
-                letterSpacing: "0.3em",
-              }}
-            >
-              RedMoon
-            </span>
-            <span
-              style={{
-                fontFamily: "Space Mono, monospace",
-                fontSize: "8px",
-                color: "#ffffff",
-                textTransform: "uppercase",
-                letterSpacing: "0.5em",
-                marginTop: "2px",
-              }}
-            >
-              Photo · Video · Art
-            </span>
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <img
+              src="/redmoon_logo3.png"
+              alt="RedMoon"
+              style={{ height: "48px", width: "auto", objectFit: "contain" }}
+            />
           </Link>
 
           {/* Ikoner */}
@@ -93,7 +68,6 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Divider */}
         <div
           style={{
             height: "1px",
@@ -103,7 +77,6 @@ export default function Footer() {
           }}
         />
 
-        {/* Tjenester */}
         <p
           style={{
             textAlign: "center",
