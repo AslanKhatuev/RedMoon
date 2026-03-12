@@ -80,7 +80,7 @@ export default async function HomePage() {
           Foto · Video · Kunst
         </p>
 
-        <h1
+        <h2
           style={{
             fontFamily: "Cormorant Garamond, serif",
             fontSize: "clamp(3rem,10vw,8rem)",
@@ -91,7 +91,7 @@ export default async function HomePage() {
           }}
         >
           {title}
-        </h1>
+        </h2>
 
         <h2
           style={{
